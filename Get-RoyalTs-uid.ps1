@@ -1,11 +1,11 @@
-﻿$RTSPSModule = Join-Path -Path ${env:ProgramFiles(x86)} -ChildPath 'code4ward.net\Royal TS V4\RoyalDocument.PowerShell.dll'
-Import-Module $RTSPSModule
+﻿#Install-Module -Name RoyalDocument.PowerShell
+Import-Module RoyalDocument.PowerShell
 
-$gatewayName = "<gatewayName>"
+$store = New-RoyalStore -UserName $args[1]
 
-$store = New-RoyalStore -UserName "<username>"
+$gatewayName = $args[2]
 
-$doc = Open-RoyalDocument -store $store -FileName "<documentPath>" -password (Read-Host -AsSecureString "Secrets") 
+$doc = Open-RoyalDocument -store $store -FileName $args[3] -password (Read-Host -AsSecureString "Secrets") 
 
 $object = Get-RoyalObject -store $store -type RoyalSecureGateway -name $gatewayName
 
